@@ -2,22 +2,19 @@
 
 namespace App\Controllers;
 
-use App\Models\Supplier;
+use App\Traits\Renderable; // Ensure this is included
 use App\Controllers\BaseController;
 
 class HomeController extends BaseController
 {
+    use Renderable; // Use the Renderable trait
+
     public function index()
     {
-        $template = 'home';
+        $template = 'login'; // This should match 'login.mustache'
         $data = [
-            'student' => 'REPLACE THIS WITH YOUR FULL NAME',
-            'title' => 'IPT10 Laboratory Activity #9',
-            'college' => 'College of Computer Studies',
-            'university' => 'Angeles University Foundation',
-            'location' => 'Angeles City, Pampanga, Philippines'
+            'title' => 'Login',
         ];
-        $output = $this->render($template, $data);
-        return $output;
+        $this->render($template, $data); // Use $this->render() from the trait
     }
 }

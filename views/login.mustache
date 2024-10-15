@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h2 {
+            text-align: center;
+        }
+        .login-container {
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px; /* Set a fixed width */
+            box-sizing: border-box; /* Include padding in width */
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: 95%; /* Full width of the container */
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .login-button {
+            background-color: #007bff; /* Blue color for the button */
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%; /* Make the button full width */
+            margin-top: 10px; /* Add some space above the button */
+        }
+        .login-button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+        .register-link {
+            display: block; /* Make it a block element for better spacing */
+            margin-top: 15px; /* Add space above the link */
+            text-align: center; /* Center the text */
+        }
+        .register-link a {
+            color: #007bff; /* Bootstrap primary color */
+            text-decoration: none; /* Remove underline */
+        }
+        .register-link a:hover {
+            text-decoration: underline; /* Underline on hover for better UX */
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form method="POST" action="/login">
+            <label for="username">Username:</label>
+            <input type="text" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" name="password" required>
+
+            <input type="submit" class="login-button" value="Login"> <!-- Updated button -->
+        </form>
+        <div class="register-link">
+            <span>Create a new account <a href="/registration-form">here</a>.</span>
+        </div>
+    </div>
+</body>
+</html>

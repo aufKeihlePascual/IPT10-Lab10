@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\BaseModel;
-
 class BaseModel
 {
     protected $db;
@@ -12,16 +10,29 @@ class BaseModel
     {
         // Global Database Connection
         global $conn;
+
+        if (!$conn) {
+            throw new \Exception('Database connection not established.');
+        }
+
         $this->db = $conn;        
     }
 
     public function fill($payload)
     {
-        foreach ($payload as $key => $value)
-        {
+        foreach ($payload as $key => $value) {
             if (property_exists($this, $key)) {
                 $this->$key = $value;
             }
         }
+    }
+
+    // Example of a method to find a record by ID
+    public function find($table, $id)
+    {
+        $sql = "SELECT * FROM $table WHERE id = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$id]);
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 }
