@@ -21,8 +21,6 @@ try {
     $router->post('/login', '\App\Controllers\LoginController@login');
     $router->get('/logout', '\App\Controllers\LoginController@logout');
 
-    // #Dashboard
-    //     $router->get('/dashboard', '\App\Controllers\DashboardController@showDashboard');
     #Welcome
     $router->get('/welcome', '\App\Controllers\WelcomeController@showWelcome');
 
