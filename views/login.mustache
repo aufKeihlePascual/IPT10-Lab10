@@ -23,8 +23,8 @@
             padding: 20px;
             background-color: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 400px; /* Set a fixed width */
-            box-sizing: border-box; /* Include padding in width */
+            width: 400px;
+            box-sizing: border-box;
         }
         label {
             display: block;
@@ -32,50 +32,57 @@
         }
         input[type="text"],
         input[type="password"] {
-            width: 95%; /* Full width of the container */
+            width: 95%;
             padding: 10px;
             margin-bottom: 15px;
             border: 1px solid #ccc;
             border-radius: 4px;
         }
         .login-button {
-            background-color: #007bff; /* Blue color for the button */
+            background-color: #007bff;
             color: white;
             border: none;
             padding: 10px;
             border-radius: 4px;
             cursor: pointer;
-            width: 100%; /* Make the button full width */
-            margin-top: 10px; /* Add some space above the button */
+            width: 100%;
+            margin-top: 10px;
         }
         .login-button:hover {
-            background-color: #0056b3; /* Darker blue on hover */
+            background-color: #0056b3;
         }
         .register-link {
-            display: block; /* Make it a block element for better spacing */
-            margin-top: 15px; /* Add space above the link */
-            text-align: center; /* Center the text */
+            display: block;
+            margin-top: 15px;
+            text-align: center;
         }
         .register-link a {
-            color: #007bff; /* Bootstrap primary color */
-            text-decoration: none; /* Remove underline */
+            color: #007bff;
+            text-decoration: none;
         }
         .register-link a:hover {
-            text-decoration: underline; /* Underline on hover for better UX */
+            text-decoration: underline;
+        }
+        .error-message {
+            color: red;
+            text-align: center;
         }
     </style>
 </head>
 <body>
     <div class="login-container">
         <h2>Login</h2>
+        {{#error}}
+            <p class="error-message">{{error}}</p>
+        {{/error}}
         <form method="POST" action="/login">
             <label for="username">Username:</label>
-            <input type="text" name="username" required>
+            <input type="text" name="username" {{#loginDisabled}}disabled{{/loginDisabled}} required>
 
             <label for="password">Password:</label>
-            <input type="password" name="password" required>
+            <input type="password" name="password" {{#loginDisabled}}disabled{{/loginDisabled}} required>
 
-            <input type="submit" class="login-button" value="Login"> <!-- Updated button -->
+            <input type="submit" class="login-button" value="Login" {{#loginDisabled}}disabled{{/loginDisabled}}>
         </form>
         <div class="register-link">
             <span>Create a new account <a href="/registration-form">here</a>.</span>

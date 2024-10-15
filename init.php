@@ -1,8 +1,9 @@
 <?php
 
+session_start();
+
 use App\Models\DatabaseConnection;
 
-// Initialize Templating Engine
 Mustache_Autoloader::register();
 $mustache = new Mustache_Engine(array(
     'loader' => new Mustache_Loader_FilesystemLoader(dirname(__FILE__).'/views')
@@ -11,7 +12,6 @@ $mustache = new Mustache_Engine(array(
 $dotenv = Dotenv\Dotenv::createMutable(__DIR__);
 $dotenv->load();
 
-// Initialize Database Connection
 $db_type = $_ENV['DB_CONNECTION'];
 $db_host = $_ENV['DB_HOST'];
 $db_port = $_ENV['DB_PORT'];

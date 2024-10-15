@@ -9,15 +9,22 @@ global $conn;
 try {
     $router = new \Bramus\Router\Router();
 
-    $router->get('/', '\App\Controllers\HomeController@index'); #   Home route
+    #home
+    $router->get('/', '\App\Controllers\HomeController@index');
+
+    #Registration
     $router->get('/registration-form', '\App\Controllers\RegistrationController@showRegistrationForm');
     $router->post('/register', '\App\Controllers\RegistrationController@register');
 
+    #Login
     $router->get('/login', '\App\Controllers\LoginController@showLoginForm');
     $router->post('/login', '\App\Controllers\LoginController@login');
-
-    $router->get('/dashboard', '\App\Controllers\DashboardController@showDashboard');
     $router->get('/logout', '\App\Controllers\LoginController@logout');
+
+    // #Dashboard
+    //     $router->get('/dashboard', '\App\Controllers\DashboardController@showDashboard');
+    #Welcome
+    $router->get('/welcome', '\App\Controllers\WelcomeController@showWelcome');
 
     $router->run();
 } catch (Exception $e) {

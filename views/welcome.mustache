@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            margin-bottom: 20px; /* Add space below the table */
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .logout {
+            text-align: center; /* Center the logout button only */
+            margin-top: 50px;
+        }
+        .logout-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none; /* Remove underline from link */
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .logout-button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Welcome to IPT10, {{username}}!</h1>
+
+    <p>Here is a list of all registered users:</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Full Name</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#users}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{first_name}} {{last_name}}</td>
+                <td>{{email}}</td>
+            </tr>
+            {{/users}}
+        </tbody>
+    </table>
+
+    <div class="logout">
+        <a href="/logout" class="logout-button">Logout</a>
+    </div>
+
+</body>
+</html>

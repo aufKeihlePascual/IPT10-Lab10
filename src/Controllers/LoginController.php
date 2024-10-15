@@ -15,41 +15,67 @@ class LoginController extends BaseController
 
     public function showLoginForm()
     {
-        $template = 'login';
+        if (isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in']) {
+            header('Location: /welcome');
+            exit;
+        }
+
         $data = [
-            'title' => 'Login', 
+            'title' => 'Login'
         ];
-        return $this->render($template, $data);
+        return $this->render('login', $data);
     }
 
     public function login()
     {
+        if (!isset($_SESSION['login_attempts'])) {
+            $_SESSION['login_attempts'] = 0;
+        }
+
+        if ($_SESSION['login_attempts'] >= 3) {
+            $data = [
+                'title' => 'Login',
+                'error' => 'Too many failed attempts. Please try again later.'
+            ];
+            return $this->render('login', $data);
+        }
+
+        // Get the form data
         $username = $_POST['username'] ?? '';
         $password = $_POST['password'] ?? '';
 
         $user = $this->userModel->login($username, $password);
 
         if ($user) {
-            
-            $_SESSION['user'] = $user;
-            header('Location: /dashboard'); 
+            $_SESSION['login_attempts'] = 0;
+
+            $_SESSION['is_logged_in'] = true;
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['username'] = $user['username']; 
+            $_SESSION['first_name'] = $user['first_name']; 
+            $_SESSION['last_name'] = $user['last_name'];
+
+            error_log("User logged in: " . print_r($_SESSION, true));
+
+            header('Location: /welcome');
             exit;
         } else {
-            
+            $_SESSION['login_attempts'] += 1;
+
             $data = [
                 'title' => 'Login',
-                'error' => 'Login failed. Please check your username and password.',
+                'error' => 'Login failed. Please check your username and password.'
             ];
-            $this->render('login', $data);
+            return $this->render('login', $data);
         }
     }
 
     public function logout()
     {
-        unset($_SESSION['user']); 
-        
+        session_destroy();
         header('Location: /login');
         exit;
     }
+
 
 }
